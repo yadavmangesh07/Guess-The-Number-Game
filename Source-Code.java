@@ -1,59 +1,64 @@
 import java.util.Random;
 import java.util.Scanner;
 
-// Class to encapsulate the logic of the number guessing game
-class GuessGame {
-    int targetNumber; // The randomly generated number to be guessed
-    int userGuess;    // The user's input guess
-    int count = 0;    // Count of attempts taken
-    boolean isCorrect = false; // Flag to track if the correct number is guessed
+class guess_game{
+    int i;
+    int c;
+    int a;
+    int count=0;
+    boolean f=false;
+    
+    public guess_game(){
+        Random ran=new Random();
+        a=ran.nextInt(51)+50;
+        i=a;
 
-    // Constructor to initialize the game with a random number
-    public GuessGame() {
-        Random random = new Random();
-        targetNumber = random.nextInt(51) + 50; // Random number between 50 and 100
     }
+    public void userinput(Scanner sc){
+        System.out.print("Enter number to guess :");
+       
+        c=sc.nextInt();
+        
 
-    // Method to take user input for their guess
-    public void userInput(Scanner scanner) {
-        System.out.print("Enter a number to guess: ");
-        userGuess = scanner.nextInt();
+
     }
-
-    // Method to check if the guessed number is correct and provide hints
-    public void checkGuess() {
-        if (targetNumber > userGuess) {
+    public void iscorrectnumber(){
+        
+        
+        if(i>c){
             System.out.println("Go for more");
-            count += 1;
-        } else if (targetNumber < userGuess) {
+            count+=1;
+        }
+        else if(i<c){
             System.out.println("Go for less");
-            count += 1;
-        } else {
-            System.out.println("You Guessed the right number");
-            isCorrect = true;
+            count+=1;
         }
+        else{
+            System.out.println("You Guessed the right number ");
+            f=true;
+        }
+
+    }
+    public void get(){
+        System.out.println("Number of attempts taken :"+count);
     }
 
-    // Method to display the number of attempts taken
-    public void displayAttempts() {
-        System.out.println("Number of attempts taken: " + count);
-    }
 }
-
-// Main class for the number guessing game
-public class Try{
+public class NumberGuess {
     public static void main(String[] args) {
-        System.out.println("The computer has generated a number between 50 and 100. Try to guess it!");
-        GuessGame game = new GuessGame(); // Create an instance of the game logic
-        Scanner scanner = new Scanner(System.in);
-
-        // Keep looping until the correct number is guessed
-        while (!game.isCorrect) {
-            game.userInput(scanner); // Take user's guess
-            game.checkGuess();       // Check if the guess is correct and provide hints
+        System.out.println();
+        System.out.println();
+        System.out.println("The computer has generated number from 50 to 100, Guess if can!!");
+        guess_game obj=new guess_game();
+         Scanner sc =new Scanner(System.in);
+        
+        while(obj.f!=true){
+            obj.userinput(sc);
+            obj.iscorrectnumber();
         }
+        obj.get();
+        sc.close();
 
-        game.displayAttempts(); // Display the number of attempts taken
-        scanner.close();        // Close the scanner
+        
     }
 }
